@@ -1,0 +1,25 @@
+# This tool's own spec. The tool must satisfy its own contract.
+name: new-saas
+description: Webapp tool that turns a validated project spec into a SaaS base.
+structure: simple
+frontend: next
+backend:
+  advanced: none
+  database: convex
+audience: individuals
+auth: convex-auth
+payments: stripe
+domain: new-saas.com
+deploy:
+  provider: dokploy
+  convex: self-hosted
+  dns: cloudflare
+  registrar: dynadot
+styling:
+  theme: tweakcn
+features:
+  demo: true
+  blog: false
+  email: resend
+  analytics: posthog
+templateVersion: 0.1.0

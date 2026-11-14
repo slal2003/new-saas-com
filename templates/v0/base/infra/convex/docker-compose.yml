@@ -1,0 +1,42 @@
+name: {{project.slug}}-convex
+
+# Self-hosted Convex for {{project.name}}.
+# Versions are required environment variables so a deploy cannot silently use
+# "latest". See infra/convex/README.md before running this.
+services:
+  backend:
+    image: ghcr.io/get-convex/convex-backend:${CONVEX_BACKEND_VERSION:?pin CONVEX_BACKEND_VERSION}
+    restart: unless-stopped
+    ports:
+      - "3210:3210"
+      - "3211:3211"
+    environment:
+      CONVEX_CLOUD_ORIGIN: ${CONVEX_CLOUD_ORIGIN:-http://localhost:3210}
+      CONVEX_SITE_ORIGIN: ${CONVEX_SITE_ORIGIN:-http://localhost:3211}
+      INSTANCE_NAME: {{project.slug}}
+      INSTANCE_SECRET: ${CONVEX_INSTANCE_SECRET:?set CONVEX_INSTANCE_SECRET}
+      DISABLE_BEACON: "true"
+    volumes:
+      - convex-data:/convex/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:3210/version || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  dashboard:
+    image: ghcr.io/get-convex/convex-dashboard:${CONVEX_DASHBOARD_VERSION:?pin CONVEX_DASHBOARD_VERSION}
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "6791:6791"
+    environment:
+      NEXT_PUBLIC_DEPLOYMENT_URL: ${CONVEX_CLOUD_ORIGIN:-http://localhost:3210}
+
+# Dokploy/Traefik terminates TLS in front of these ports. Do not expose the
+# backend directly to the public internet in production.
+volumes:
+  convex-data:

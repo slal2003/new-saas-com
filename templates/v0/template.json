@@ -1,0 +1,8 @@
+{
+  "templateId": "v0",
+  "version": "0.1.0",
+  "structure": "simple",
+  "schemaVersion": 1,
+  "description": "Generic Next.js App Router + Convex + Convex Auth v2 base extracted from compliance-2.",
+  "updatedAt": "2026-11-14"
+}
