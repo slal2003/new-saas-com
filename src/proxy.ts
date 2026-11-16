@@ -7,7 +7,10 @@ async function getProxyHandler() {
   if (!handler) {
     const { convexAuthNextjsProxy } = await import("@/lib/auth/next-auth");
     handler = convexAuthNextjsProxy(async (request, ctx) => {
-      if (request.nextUrl.pathname.startsWith("/dashboard")) {
+      if (
+        request.nextUrl.pathname.startsWith("/dashboard") ||
+        request.nextUrl.pathname.startsWith("/projects")
+      ) {
         const authenticated = await ctx.isAuthenticated();
         if (!authenticated) {
           return NextResponse.redirect(new URL("/sign-in", request.url));
@@ -29,5 +32,5 @@ export default async function proxy(request: NextRequest) {
 
 export const config = {
   // Keep /auth out of the matcher: those routes manage their own cookies.
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*", "/projects/:path*"],
 };

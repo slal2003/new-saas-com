@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { getCapabilities } from "@/lib/capabilities";
 
-export default async function DashboardLayout({ children }: { children: ReactNode }) {
+export default async function WorkspaceLayout({ children }: { children: ReactNode }) {
   const capabilities = getCapabilities();
 
   if (capabilities.auth.mode === "unconfigured") {

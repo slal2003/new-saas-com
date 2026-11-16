@@ -12,3 +12,6 @@ coverage/
 .convex/
 .DS_Store
 .vercel/
+
+# Local agent state (taste memory, plans)
+.commandcode/

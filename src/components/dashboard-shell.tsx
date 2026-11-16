@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import {
   FolderKanban,
+  House,
   LayoutDashboard,
   LogOut,
   Plus,
@@ -24,7 +25,7 @@ const NAV_ITEMS = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/dashboard/projects", label: "Projects", icon: FolderKanban },
   { href: "/projects/new", label: "New project", icon: Plus },
-  { href: "/setup", label: "Setup", icon: Settings },
+  { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
 function NavLinks({ pathname, mobile = false }: { pathname: string; mobile?: boolean }) {
@@ -105,7 +106,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-background">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-border bg-card/60 md:flex">
         <div className="flex h-16 items-center border-b border-border px-5">
-          <Logo href="/dashboard" />
+          <Logo />
         </div>
         <nav className="flex-1 space-y-1 overflow-y-auto p-3">
           <p className="px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
@@ -131,16 +132,22 @@ export function DashboardShell({ children }: { children: ReactNode }) {
               <LogOut className="size-4" />
             </Button>
           </div>
-          <p className="px-1 text-[10px] text-muted-foreground">
-            Template v0 · {capabilities.data.mode} data
-          </p>
+          <div className="flex items-center justify-between gap-2 px-1 text-[10px] text-muted-foreground">
+            <span>Template v0 · {capabilities.data.mode} data</span>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1 font-medium transition-colors hover:text-foreground"
+            >
+              <House className="size-3" /> Back to site
+            </Link>
+          </div>
         </div>
       </aside>
 
       <div className="md:pl-64">
         <header className="sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b border-border bg-background/85 px-4 backdrop-blur sm:px-6">
           <div className="md:hidden">
-            <Logo href="/dashboard" compact />
+            <Logo compact />
           </div>
           <div className="hidden items-center gap-2 text-sm text-muted-foreground md:flex">
             <Blocks className="size-4 text-primary" />

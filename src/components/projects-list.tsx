@@ -37,11 +37,13 @@ function ProjectsView({ projects, source }: { projects: ProjectRow[]; source: st
             Every project keeps immutable spec snapshots and a template version pin.
           </p>
         </div>
-        <Button asChild>
-          <Link href="/projects/new">
-            <Plus className="size-4" /> New project
-          </Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button size="sm" asChild>
+            <Link href="/projects/new">
+              <Plus className="size-3.5" /> New project
+            </Link>
+          </Button>
+        </div>
       </div>
 
       {projects.length === 0 ? (
