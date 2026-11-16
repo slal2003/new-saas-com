@@ -29,7 +29,6 @@ export function AppHeader() {
         </div>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           {status === "authenticated" ? (
             <>
               <span className="hidden text-xs text-muted-foreground sm:inline">{user?.name}</span>
@@ -54,6 +53,7 @@ export function AppHeader() {
               </Button>
             </>
           )}
+          <ThemeToggle />
         </div>
       </div>
     </header>

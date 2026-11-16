@@ -23,9 +23,15 @@ export function ThemeToggle() {
   }
 
   return (
-    <Button variant="outline" size="sm" onClick={cycle} aria-label={`Theme: ${label}`}>
+    <Button
+      variant="ghost"
+      size="icon-sm"
+      onClick={cycle}
+      aria-label={`Theme: ${label}`}
+      title={`Theme: ${label}`}
+      className="text-muted-foreground/70 hover:text-foreground"
+    >
       <Icon className="size-4" />
-      <span className="hidden sm:inline">{label}</span>
     </Button>
   );
 }

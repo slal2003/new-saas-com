@@ -154,12 +154,12 @@ export function DashboardShell({ children }: { children: ReactNode }) {
             <span>Deterministic scaffolds from a validated spec</span>
           </div>
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <Button variant="outline" size="sm" asChild>
               <Link href="/projects/new">
                 <Plus className="size-3.5" /> New project
               </Link>
             </Button>
+            <ThemeToggle />
           </div>
         </header>
 
